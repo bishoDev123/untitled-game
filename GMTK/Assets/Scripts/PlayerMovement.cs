@@ -17,15 +17,50 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(InputManager.IM.forward))
+        {
+            rb.velocity += Vector2.up * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
+        }
+        if (Input.GetKeyDown(InputManager.IM.left))
+        {
+            rb.velocity -= Vector2.right * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
+        }
+        if (Input.GetKeyDown(InputManager.IM.right))
+        {
+            rb.velocity += Vector2.right * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
+        }
+        if (Input.GetKeyDown(InputManager.IM.backward))
+        {
+            rb.velocity -= Vector2.up * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
+        }
+
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveY = Input.GetAxisRaw("Vertical");
+        /*
+        KeyCode[] ops = InputManager.IM.diceOptions[GameManager.GM.diceUp];
+        for(int i = 0; i < 4; i++)
+        {
+            if (Input.GetKeyDown(ops[i]))
+            {
 
-        moveDirection = new Vector2(moveX, moveY);
+            }
+        }
+        */
 
-        rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
+        
+        if(rb.velocity.magnitude > 0.0f)
+        {
+            rb.velocity *= 0.9f;
+        }
 
     }
 }
