@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement PM;
+
+    public GameObject playerGameObject;
+
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Vector2 moveDirection;
@@ -15,8 +19,22 @@ public class PlayerMovement : MonoBehaviour
     private float moveY;
     private float nextMoveTime = 0;
 
+    public float stopSpeed;
+
     void Start()
     {
+        //makes sure there is only one player movement script
+        if (PM == null)
+        {
+            PM = this;
+        }
+        else if (PM != this)
+        {
+            Destroy(gameObject);
+        }
+
+        playerGameObject = gameObject;
+
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
     }
@@ -26,28 +44,34 @@ public class PlayerMovement : MonoBehaviour
         sr.color = Color.green;
         if (Time.time > nextMoveTime)
         {
-            
+            //if the certain movement key is pressed
             if (Input.GetKeyDown(InputManager.IM.forward))
             {
-                rb.velocity += Vector2.up * (float)GameManager.GM.diceBack;
+                //add the up vector velocity times the number on the back of the dice, times the default speed
+                rb.velocity += Vector2.up * (float)GameManager.GM.diceBack * speed;
+
+                //get a new dice number setup
                 GameManager.GM.rollDie();
+
+                //reset the cooldown time
                 nextMoveTime = Time.time + cooldownTime;
+
             }
             if (Input.GetKeyDown(InputManager.IM.left))
             {
-                rb.velocity -= Vector2.right * (float)GameManager.GM.diceBack;
+                rb.velocity -= Vector2.right * (float)GameManager.GM.diceBack * speed;
                 GameManager.GM.rollDie();
                 nextMoveTime = Time.time + cooldownTime;
             }
             if (Input.GetKeyDown(InputManager.IM.right))
             {
-                rb.velocity += Vector2.right * (float)GameManager.GM.diceBack;
+                rb.velocity += Vector2.right * (float)GameManager.GM.diceBack * speed;
                 GameManager.GM.rollDie();
                 nextMoveTime = Time.time + cooldownTime;
             }
             if (Input.GetKeyDown(InputManager.IM.backward))
             {
-                rb.velocity -= Vector2.up * (float)GameManager.GM.diceBack;
+                rb.velocity -= Vector2.up * (float)GameManager.GM.diceBack * speed;
                 GameManager.GM.rollDie();
                 nextMoveTime = Time.time + cooldownTime;
             }
@@ -78,6 +102,10 @@ public class PlayerMovement : MonoBehaviour
         
         if(rb.velocity.magnitude > 0.0f)
         {
+            if(rb.velocity.magnitude < stopSpeed)
+            {
+                rb.velocity = Vector2.zero;
+            }
             rb.velocity *= 0.9f;
         }
 
