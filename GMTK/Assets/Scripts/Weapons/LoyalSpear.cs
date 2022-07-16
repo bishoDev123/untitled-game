@@ -5,8 +5,8 @@ using UnityEngine;
 public class LoyalSpear : MonoBehaviour
 {
     public static LoyalSpear LS;
+    public ParticleSystem elec;
 
-    
     float rotAngle;
 
     public Vector2 target { get; set; }
@@ -50,6 +50,7 @@ public class LoyalSpear : MonoBehaviour
         thrown = false;
         tumbling = false;
         rotAngle = 0.0f;
+        elec.Stop();
     }
 
     // Update is called once per frame
@@ -65,6 +66,7 @@ public class LoyalSpear : MonoBehaviour
                     returning = false;
                     Vector2 dir = (transform.position - player.transform.position).normalized;
                     rotAngle = Mathf.Atan2(dir.y, dir.x);
+                    elec.Stop();
                 }
 
                 spearR.velocity = (player.transform.position - transform.position).normalized * spearVelocity * 0.7f;
@@ -96,6 +98,7 @@ public class LoyalSpear : MonoBehaviour
                     //r.direction = new Vector3(0.0f, 0.0f, 1.0f);
                     //r.origin = Input.mousePosition;
                     RaycastHit2D rayHit = Physics2D.Raycast(mp, Vector2.zero);
+                    elec.Play();
 
 
 
