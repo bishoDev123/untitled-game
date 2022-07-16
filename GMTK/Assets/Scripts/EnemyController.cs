@@ -12,7 +12,6 @@ public class EnemyController : MonoBehaviour
     public HealthbarController HPdisplay;
 
     public float speed;
-    public float knockback;
     public float health;
     public float maxHealth;
 
