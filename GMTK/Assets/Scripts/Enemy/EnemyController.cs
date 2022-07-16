@@ -32,6 +32,8 @@ public class EnemyController : MonoBehaviour
         rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
 
         HPdisplay.SetHealth(health, maxHealth);
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,6 +45,14 @@ public class EnemyController : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.gameObject == PlayerMovement.PM.gameObject)
+        {
+            PlayerMovement.PM.addKnockback(transform.position);
         }
     }
 }
