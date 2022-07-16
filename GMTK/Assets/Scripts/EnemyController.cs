@@ -9,11 +9,17 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 direction;
 
+    public HealthbarController HPdisplay;
+
     public float speed;
+    public float knockback;
+    public float health;
+    public float maxHealth;
 
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -25,5 +31,19 @@ public class EnemyController : MonoBehaviour
         
         //moves the enemy based on the direction
         rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
+
+        HPdisplay.SetHealth(health, maxHealth);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "weapon")
+        {
+            health -= 1;
+            if(health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
