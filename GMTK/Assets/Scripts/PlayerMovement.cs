@@ -5,56 +5,39 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private SpriteRenderer sr;
     private Vector2 moveDirection;
     
     public float speed;
-    public float cooldownTime;
 
     private float moveX;
     private float moveY;
-    private float nextMoveTime = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        sr.color = Color.green;
-        if (Time.time > nextMoveTime)
+        if (Input.GetKeyDown(InputManager.IM.forward))
         {
-            
-            if (Input.GetKeyDown(InputManager.IM.forward))
-            {
-                rb.velocity += Vector2.up * (float)GameManager.GM.diceBack;
-                GameManager.GM.rollDie();
-                nextMoveTime = Time.time + cooldownTime;
-            }
-            if (Input.GetKeyDown(InputManager.IM.left))
-            {
-                rb.velocity -= Vector2.right * (float)GameManager.GM.diceBack;
-                GameManager.GM.rollDie();
-                nextMoveTime = Time.time + cooldownTime;
-            }
-            if (Input.GetKeyDown(InputManager.IM.right))
-            {
-                rb.velocity += Vector2.right * (float)GameManager.GM.diceBack;
-                GameManager.GM.rollDie();
-                nextMoveTime = Time.time + cooldownTime;
-            }
-            if (Input.GetKeyDown(InputManager.IM.backward))
-            {
-                rb.velocity -= Vector2.up * (float)GameManager.GM.diceBack;
-                GameManager.GM.rollDie();
-                nextMoveTime = Time.time + cooldownTime;
-            }
+            rb.velocity += Vector2.up * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
         }
-        else 
+        if (Input.GetKeyDown(InputManager.IM.left))
         {
-            sr.color = Color.red;
+            rb.velocity -= Vector2.right * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
+        }
+        if (Input.GetKeyDown(InputManager.IM.right))
+        {
+            rb.velocity += Vector2.right * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
+        }
+        if (Input.GetKeyDown(InputManager.IM.backward))
+        {
+            rb.velocity -= Vector2.up * (float)GameManager.GM.diceBack;
+            GameManager.GM.rollDie();
         }
 
     }
