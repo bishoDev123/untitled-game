@@ -14,12 +14,6 @@ public class PlayerMovement : MonoBehaviour
     private float moveX;
     private float moveY;
     private float nextMoveTime = 0;
-    private Vector2 moveDirection;
-    
-    public float speed;
-
-    private float moveX;
-    private float moveY;
 
     void Start()
     {
@@ -84,12 +78,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity *= 0.9f;
         }
-        moveX = Input.GetAxisRaw("Horizontal");
-        moveY = Input.GetAxisRaw("Vertical");
-
-        moveDirection = new Vector2(moveX, moveY);
-
-        rb.velocity = new Vector2(moveDirection.x * speed, moveDirection.y * speed);
 
     }
 }
