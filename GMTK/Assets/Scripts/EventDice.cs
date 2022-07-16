@@ -35,7 +35,8 @@ public class EventDice : MonoBehaviour
             //halt all previous rotation
             diceR.angularVelocity = Vector3.zero;
 
-            Debug.Log(checkDirection());
+            
+            //Debug.Log(checkDirection());
         }
 
         if (Time.time - prevTime >= 1.0f)
