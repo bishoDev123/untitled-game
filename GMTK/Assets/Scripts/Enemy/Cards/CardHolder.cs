@@ -30,16 +30,20 @@ public class CardHolder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //get the distance from the cardPark distance radius (so if its 5 away from player and park dist is 8, dist will be 3)
         float dist = cardHolderParkDist - Vector2.Distance(transform.position, PlayerMovement.PM.transform.position);
+        //if further than 3 away from park distance
         if (Mathf.Abs(dist) > 1.0f && Time.time - prevJumpTime > 3.0f)
         {
+            //get the direction from player to this enemy
             Vector3 dir = (transform.position - PlayerMovement.PM.transform.position).normalized;
+            //move either closer or further from player
             rb.velocity += 10.0f * new Vector2(dir.x, dir.y) * Mathf.Sign(dist);
-
+            //reset jump timer
             prevJumpTime = Time.time;
         }
 
+        //launch cards 
         if(Time.time - prevLaunchTime > 10.0f)
         {
 
@@ -50,9 +54,9 @@ public class CardHolder : MonoBehaviour
         
     }
 
-
     private void FixedUpdate()
     {
+        //friction
         if (rb.velocity.magnitude > 0.0f)
         {
             rb.velocity *= 0.9f;

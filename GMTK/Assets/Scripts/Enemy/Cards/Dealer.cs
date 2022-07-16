@@ -13,6 +13,7 @@ public class Dealer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //make the originals not actually do anything
         cardHolder.SetActive(false);
         cardMissile.SetActive(false);
 
@@ -26,10 +27,11 @@ public class Dealer : MonoBehaviour
             Destroy(gameObject);
         }
 
-
+        //create one card holder at the start
         GameObject temp = Instantiate(cardHolder);
         temp.SetActive(true);
 
+        //the spawner timer
         prevSpawnTime = 0.0f;
     }
 
@@ -47,6 +49,7 @@ public class Dealer : MonoBehaviour
     }
 
 
+    //if a card holder enemy wants to launch some cards then they're created here so that their game objects can be activated
     public void requestLaunch(int quantity, Transform cardHolderTransform)
     {
         for(int i = 0; i < quantity; i++)

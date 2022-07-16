@@ -16,20 +16,23 @@ public class CardMissile : MonoBehaviour
     void Start()
     {
 
-
+        //start at the parents location
         transform.position = gameObject.GetComponentInParent<Transform>().position;
 
+        //the starting animation
         starting = true;
 
+        //set rigidbody
         rb = gameObject.GetComponent<Rigidbody2D>();
 
 
-
+        //what angle does it "launch" away from parent at start
         startAng = Random.Range(0.0f, 6.28f);
 
+        //shuffle away from parent
         rb.velocity = new Vector2(Mathf.Cos(startAng), Mathf.Sin(startAng)) * 10.0f;
 
-
+        //add a little pin to the shuffle for style
         rb.AddTorque(Random.Range(-100.0f, 100.0f));
 
 
