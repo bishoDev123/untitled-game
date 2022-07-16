@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float stopSpeed;
 
+    public float knockback;
+
     void Start()
     {
         //makes sure there is only one player movement script
@@ -110,4 +112,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+    public void addKnockback(Vector3 position)
+    {
+        Vector3 dir = (transform.position - position).normalized;
+        rb.velocity += (new Vector2(dir.x, dir.y) * knockback);
+    }
+
+
 }
