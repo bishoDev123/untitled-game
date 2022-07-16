@@ -8,16 +8,22 @@ public class CardHolder : MonoBehaviour
     public float cardHolderParkDist;
 
     private Rigidbody2D rb;
+
+    public GameObject cardMissile;
     
     
-    
-    private float prevTime;
+    private float prevJumpTime;
+    private float prevLaunchTime;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        
+
         rb = gameObject.GetComponent<Rigidbody2D>();
-        prevTime = 0.0f;
+        prevJumpTime = 0.0f;
+        prevLaunchTime = 0.0f;
     }
 
 
@@ -26,12 +32,19 @@ public class CardHolder : MonoBehaviour
     {
         
         float dist = cardHolderParkDist - Vector2.Distance(transform.position, PlayerMovement.PM.transform.position);
-        if (Mathf.Abs(dist) > 1.0f && Time.time - prevTime > 3.0f)
+        if (Mathf.Abs(dist) > 1.0f && Time.time - prevJumpTime > 3.0f)
         {
             Vector3 dir = (transform.position - PlayerMovement.PM.transform.position).normalized;
             rb.velocity += 10.0f * new Vector2(dir.x, dir.y) * Mathf.Sign(dist);
 
-            prevTime = Time.time;
+            prevJumpTime = Time.time;
+        }
+
+        if(Time.time - prevLaunchTime > 10.0f)
+        {
+
+            prevLaunchTime = Time.time;
+            Dealer.CardMaster.requestLaunch(3, transform);
         }
 
         
