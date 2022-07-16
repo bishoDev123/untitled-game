@@ -59,30 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(InputManager.IM.forward))
-        {
-            rb.velocity += Vector2.up * (float)GameManager.GM.diceBack;
-            GameManager.GM.rollDie();
-        }
-        if (Input.GetKeyDown(InputManager.IM.left))
-        {
-            rb.velocity -= Vector2.right * (float)GameManager.GM.diceBack;
-            GameManager.GM.rollDie();
-        }
-        if (Input.GetKeyDown(InputManager.IM.right))
-        {
-            rb.velocity += Vector2.right * (float)GameManager.GM.diceBack;
-            GameManager.GM.rollDie();
-        }
-        if (Input.GetKeyDown(InputManager.IM.backward))
-        {
-            rb.velocity -= Vector2.up * (float)GameManager.GM.diceBack;
-            GameManager.GM.rollDie();
-        }
 
-    }
 
     // Update is called once per frame
     void FixedUpdate()
