@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
                 //reset the cooldown time
                 nextMoveTime = Time.time + cooldownTime;
 
+                FindObjectOfType<AudioManager>().Play("diceRoll1");
+
             }
             if (Input.GetKeyDown(InputManager.IM.left))
             {
