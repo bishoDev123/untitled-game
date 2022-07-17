@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardMissile : MonoBehaviour
 {
     public float missileSpeed;
+    public float missileDamage;
 
 
     private float startAng;
@@ -83,6 +84,7 @@ public class CardMissile : MonoBehaviour
 
         if (collision.gameObject == PlayerMovement.PM.gameObject)
         {
+            HealthHandler.HH.dockHealth(missileDamage);
             Destroy(gameObject);
         }
 

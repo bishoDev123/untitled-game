@@ -8,6 +8,7 @@ public class Dealer : MonoBehaviour
 
     public GameObject cardHolder;
     public GameObject cardMissile;
+    public GameObject knight;
 
     private float prevSpawnTime;
     // Start is called before the first frame update
@@ -16,6 +17,7 @@ public class Dealer : MonoBehaviour
         //make the originals not actually do anything
         cardHolder.SetActive(false);
         cardMissile.SetActive(false);
+        knight.SetActive(false);
 
         //makes sure there is only one player movement script
         if (CardMaster == null)
@@ -29,6 +31,10 @@ public class Dealer : MonoBehaviour
 
         //create one card holder at the start
         GameObject temp = Instantiate(cardHolder);
+        temp.SetActive(true);
+
+        //create one card holder at the start
+        temp = Instantiate(knight);
         temp.SetActive(true);
 
         //the spawner timer
