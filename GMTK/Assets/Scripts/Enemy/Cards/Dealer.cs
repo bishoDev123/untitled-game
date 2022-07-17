@@ -36,6 +36,7 @@ public class Dealer : MonoBehaviour
         whiteSquare.SetActive(false);
         blackSquare.SetActive(false);
 
+        /*
         enemyTypes = new GameObject[3];
 
         enemyTypes[0] = cardHolder;
@@ -50,6 +51,7 @@ public class Dealer : MonoBehaviour
         {
             spawned[i] = false;
         }
+        */
 
         //makes sure there is only one player movement script
         if (CardMaster == null)
@@ -61,6 +63,7 @@ public class Dealer : MonoBehaviour
             Destroy(gameObject);
         }
 
+        /*
         //create one card holder at the start
         temp = Instantiate(cardHolder);
         temp.SetActive(true);
@@ -71,6 +74,7 @@ public class Dealer : MonoBehaviour
 
         temp = Instantiate(rook);
         temp.SetActive(true);
+        */
 
         //the spawner timer
         prevSpawnTime = 0.0f;
@@ -81,7 +85,7 @@ public class Dealer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
         for(int i = 0; i < spawnAgenda.Length; i++)
         {
             if(Time.time >= spawnAgenda[i, 3] && !spawned[i])
@@ -89,14 +93,14 @@ public class Dealer : MonoBehaviour
                 int type = (int)spawnAgenda[i, 3];
                 for(int u = 0; u < (int)spawnAgenda[i, 4]; i++)
                 {
-
-                    temp = Instantiate(enemyTypes[type], new Vector3(spawnAgenda[i, 0], spawnAgenda[i, 1], 0.0f), Quaternion.Euler(new Vector3(0f, 0f, 0f)));
+                    Vector3 variation = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, -2f), 0f) * (float)u;
+                    temp = Instantiate(enemyTypes[type], new Vector3(spawnAgenda[i, 0], spawnAgenda[i, 1], 0.0f) + variation, Quaternion.Euler(new Vector3(0f, 0f, 0f)));
                     temp.SetActive(true);
                     spawned[i] = true;
                 }
             }
         }
-        
+        */
 
 
         /*
