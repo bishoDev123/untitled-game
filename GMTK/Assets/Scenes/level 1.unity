@@ -884,7 +884,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &657564115
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1682,6 +1682,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949377105}
   m_CullTransparentMesh: 1
+--- !u!1 &2122877544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4164450870439294285, guid: f9b50ad549a3d3843ac6256920e628f2, type: 3}
+  m_PrefabInstance: {fileID: 4164450870618730008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2122877549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122877544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b3830813991cb499412d5034102827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 657564113}
 --- !u!1 &2123889554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,11 +1803,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4164450870439294273, guid: f9b50ad549a3d3843ac6256920e628f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 4164450870439294273, guid: f9b50ad549a3d3843ac6256920e628f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 27.43
       objectReference: {fileID: 0}
     - target: {fileID: 4164450870439294273, guid: f9b50ad549a3d3843ac6256920e628f2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1839,6 +1857,10 @@ PrefabInstance:
       propertyPath: HPdisplay
       value: 
       objectReference: {fileID: 1903882253}
+    - target: {fileID: 4164450870439294287, guid: f9b50ad549a3d3843ac6256920e628f2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4164450870439294287, guid: f9b50ad549a3d3843ac6256920e628f2, type: 3}
       propertyPath: maxHealth
       value: 5
