@@ -6,6 +6,10 @@ public class CardHolder : MonoBehaviour
 {
 
     public float cardHolderParkDist;
+    public float jumpDelay;
+    public float launchDelay;
+    public int launchAmount;
+    
 
     private Rigidbody2D rb;
 
@@ -33,7 +37,7 @@ public class CardHolder : MonoBehaviour
         //get the distance from the cardPark distance radius (so if its 5 away from player and park dist is 8, dist will be 3)
         float dist = cardHolderParkDist - Vector2.Distance(transform.position, PlayerMovement.PM.transform.position);
         //if further than 3 away from park distance
-        if (Mathf.Abs(dist) > 1.0f && Time.time - prevJumpTime > 3.0f)
+        if (Mathf.Abs(dist) > 1.0f && Time.time - prevJumpTime > jumpDelay)
         {
             //get the direction from player to this enemy
             Vector3 dir = (transform.position - PlayerMovement.PM.transform.position).normalized;
@@ -44,11 +48,11 @@ public class CardHolder : MonoBehaviour
         }
 
         //launch cards 
-        if(Time.time - prevLaunchTime > 10.0f)
+        if(Time.time - prevLaunchTime > launchDelay)
         {
 
             prevLaunchTime = Time.time;
-            Dealer.CardMaster.requestLaunch(3, transform);
+            Dealer.CardMaster.requestLaunch(launchAmount, transform);
         }
 
         

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthHandler : MonoBehaviour
 {
+    public static HealthHandler HH;
+
     public float health;
     public float maxHealth;
 
@@ -11,6 +13,16 @@ public class HealthHandler : MonoBehaviour
 
     void Start()
     {
+        //makes sure there is only one player movement script
+        if (HH == null)
+        {
+            HH = this;
+        }
+        else if (HH != this)
+        {
+            Destroy(gameObject);
+        }
+
         health = maxHealth;
     }
 
@@ -36,4 +48,10 @@ public class HealthHandler : MonoBehaviour
             }
         }
     }
+
+    public void dockHealth(float amount)
+    {
+        health -= amount;
+    }
+
 }
