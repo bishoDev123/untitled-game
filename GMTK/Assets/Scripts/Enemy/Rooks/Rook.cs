@@ -7,7 +7,7 @@ public class Rook : MonoBehaviour
     public float dashDelay;
     public float dashSpeed;
     public float dashDistance;
-    
+
     private float prevDashTime;
 
     private bool strtDash;
@@ -22,6 +22,7 @@ public class Rook : MonoBehaviour
 
     private bool interfered;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,10 +34,20 @@ public class Rook : MonoBehaviour
 
     }
 
+    //  private Vector3 Roamer()
+    //  {
+    //       return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
+    //  }
+
+    //  private Vector3 GetRoamingDirection()
+    //   {
+    //      return startingPosition + Roamer() * Random.Range(10f, 70f);
+    //  }
+
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - prevDashTime >= dashDelay)
+        if (Time.time - prevDashTime >= dashDelay)
         {
             target = Instantiate(Dealer.CardMaster.rookTarget, transform);
             target.SetActive(true);
@@ -52,7 +63,7 @@ public class Rook : MonoBehaviour
 
         if (strtDash)
         {
-            
+
             rb.velocity = new Vector2(dir.x, dir.y) * dashSpeed;
 
             strtDash = false;
@@ -63,11 +74,11 @@ public class Rook : MonoBehaviour
     {
         if (Vector3.Distance(dashStart, transform.position) > dashDistance + 0.5f)
         {
-            rb.velocity = Vector2.zero;            
+            rb.velocity = Vector2.zero;
         }
 
-        
-        if (interfered && rb.velocity.magnitude > 0.0f) 
+
+        if (interfered && rb.velocity.magnitude > 0.0f)
         {
             rb.velocity *= 0.9f;
             if (rb.velocity.magnitude < 0.5f)
@@ -75,7 +86,7 @@ public class Rook : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         }
-        
+
     }
 
     void startDash()
@@ -92,7 +103,7 @@ public class Rook : MonoBehaviour
         {
             HealthHandler.HH.dockHealth(1f);
             PlayerMovement.PM.addKnockback(transform.position);
-        } 
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
