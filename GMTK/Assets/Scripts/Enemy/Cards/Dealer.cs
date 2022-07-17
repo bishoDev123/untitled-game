@@ -24,8 +24,8 @@ public class Dealer : MonoBehaviour
         knight.SetActive(false);
         rook.SetActive(false);
         rookTarget.SetActive(false);
-        //whiteSquare.SetActive(false);
-        //blackSquare.SetActive(false);
+        whiteSquare.SetActive(false);
+        blackSquare.SetActive(false);
 
         //makes sure there is only one player movement script
         if (CardMaster == null)
