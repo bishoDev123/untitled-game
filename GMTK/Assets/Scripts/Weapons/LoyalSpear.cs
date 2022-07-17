@@ -108,6 +108,7 @@ public class LoyalSpear : MonoBehaviour
                     //get the hit place for the spear target
                     RaycastHit2D rayHit = Physics2D.Raycast(mp, Vector2.zero);
                     //elec.Play();
+
                     if (rayHit)
                     {
                         //if the ray hit, then set the target to where the mouse clicked

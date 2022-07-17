@@ -48,13 +48,29 @@ public class CardHolder : MonoBehaviour
         }
 
         //launch cards 
-        if(Time.time - prevLaunchTime > launchDelay)
+        if (Time.time - prevLaunchTime > launchDelay)
         {
+            //only launch if player is in sight
+            Ray2D r = new Ray2D();
+            r.direction = (PlayerMovement.PM.gameObject.transform.position - transform.position).normalized;
+            r.origin = transform.position;
+            RaycastHit2D hit = Physics2D.Raycast(r.origin, r.direction, 20.0f, layerMask:7);
 
-            prevLaunchTime = Time.time;
-            Dealer.CardMaster.requestLaunch(launchAmount, transform);
+            Debug.DrawRay(r.origin, r.direction * 20.0f, Color.red, 10.0f);
+
+            if (hit)
+            {
+                Debug.Log("hit");
+                if (hit.collider.gameObject == PlayerMovement.PM.transform.gameObject)
+                {
+                    Debug.Log("ahfafffaf");
+                    prevLaunchTime = Time.time;
+                    Dealer.CardMaster.requestLaunch(launchAmount, transform);
+                }
+
+
+            }
         }
-
         
     }
 
