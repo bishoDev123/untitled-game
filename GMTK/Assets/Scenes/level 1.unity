@@ -949,7 +949,7 @@ MonoBehaviour:
   speed: 4
   cooldownTime: 0.7
   stopSpeed: 0
-  knockback: 0
+  knockback: 10
 --- !u!212 &657564112
 SpriteRenderer:
   m_ObjectHideFlags: 0
