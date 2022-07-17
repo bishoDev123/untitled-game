@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.CompareTag("exit"))
         {
-            SceneManager.LoadScene("level 1");
+            SceneManager.LoadScene(2);
         }
     }
 
