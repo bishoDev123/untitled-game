@@ -88,7 +88,7 @@ public class RookTarget : MonoBehaviour
             {
                 if (currentSquare % 2.0f == 0.0f)
                 {
-                    squares[(int)currentSquare] = Instantiate(Dealer.CardMaster.whiteSquare, dashStart + (dir * (currentSquare + 1.0f) * squareStep), transform.rotation);
+                    //squares[(int)currentSquare] = Instantiate(Dealer.CardMaster.whiteSquare, dashStart + (dir * (currentSquare + 1.0f) * squareStep), transform.rotation);
                     squares[(int)currentSquare].SetActive(true);
                     squares[(int)currentSquare].transform.localScale = new Vector3(squareStep, squareStep, 1.0f);
 
@@ -98,7 +98,7 @@ public class RookTarget : MonoBehaviour
                 else
                 {
 
-                    squares[(int)currentSquare] = Instantiate(Dealer.CardMaster.blackSquare, dashStart + (dir * (currentSquare + 1.0f) * squareStep), transform.rotation);
+                    //squares[(int)currentSquare] = Instantiate(Dealer.CardMaster.blackSquare, dashStart + (dir * (currentSquare + 1.0f) * squareStep), transform.rotation);
                     squares[(int)currentSquare].SetActive(true);
                     squares[(int)currentSquare].transform.localScale = new Vector3(squareStep, squareStep, 1.0f);
 
