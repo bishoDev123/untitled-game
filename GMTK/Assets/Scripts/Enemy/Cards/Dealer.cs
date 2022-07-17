@@ -15,6 +15,15 @@ public class Dealer : MonoBehaviour
     public GameObject blackSquare;
 
     private float prevSpawnTime;
+
+
+    private GameObject[] enemyTypes;
+
+    private float[,] spawnAgenda;
+    private bool[] spawned;
+
+    private GameObject temp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +36,21 @@ public class Dealer : MonoBehaviour
         whiteSquare.SetActive(false);
         blackSquare.SetActive(false);
 
+        enemyTypes = new GameObject[3];
+
+        enemyTypes[0] = cardHolder;
+        enemyTypes[1] = knight;
+        enemyTypes[2] = rook;
+
+        //for each spawn, do: x, y, time, type, quantity
+        spawnAgenda = new float[,] { {10.0f, 10.0f, 2.0f, 1f, 1f } };
+
+        spawned = new bool[spawnAgenda.Length];
+        for(int i = 0; i < spawned.Length; i++)
+        {
+            spawned[i] = false;
+        }
+
         //makes sure there is only one player movement script
         if (CardMaster == null)
         {
@@ -38,7 +62,7 @@ public class Dealer : MonoBehaviour
         }
 
         //create one card holder at the start
-        GameObject temp = Instantiate(cardHolder);
+        temp = Instantiate(cardHolder);
         temp.SetActive(true);
 
         //create one card holder at the start
@@ -52,9 +76,29 @@ public class Dealer : MonoBehaviour
         prevSpawnTime = 0.0f;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
+        
+        for(int i = 0; i < spawnAgenda.Length; i++)
+        {
+            if(Time.time >= spawnAgenda[i, 3] && !spawned[i])
+            {
+                int type = (int)spawnAgenda[i, 3];
+                for(int u = 0; u < (int)spawnAgenda[i, 4]; i++)
+                {
+
+                    temp = Instantiate(enemyTypes[type], new Vector3(spawnAgenda[i, 0], spawnAgenda[i, 1], 0.0f), Quaternion.Euler(new Vector3(0f, 0f, 0f)));
+                    temp.SetActive(true);
+                    spawned[i] = true;
+                }
+            }
+        }
+        
+
+
         /*
         if(Time.time - prevSpawnTime > 15.0f){
             GameObject temp = Instantiate(cardHolder);
