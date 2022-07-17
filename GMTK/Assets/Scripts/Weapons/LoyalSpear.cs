@@ -10,8 +10,8 @@ public class LoyalSpear : MonoBehaviour
     float rotAngle;
 
     public Vector2 target { get; set; }
-    
-    
+
+
     public Rigidbody2D spearR;
 
     public GameObject spearTarget;
@@ -50,7 +50,7 @@ public class LoyalSpear : MonoBehaviour
         thrown = false;
         tumbling = false;
         rotAngle = 0.0f;
-        elec.Stop();
+        //elec.Stop();
     }
 
     // Update is called once per frame
@@ -61,12 +61,12 @@ public class LoyalSpear : MonoBehaviour
 
             if (returning)
             {
-                if(Vector2.Distance(player.transform.position, transform.position) < 1.0f)
+                if (Vector2.Distance(player.transform.position, transform.position) < 1.0f)
                 {
                     returning = false;
                     Vector2 dir = (transform.position - player.transform.position).normalized;
                     rotAngle = Mathf.Atan2(dir.y, dir.x);
-                    elec.Stop();
+                    //elec.Stop();
                 }
 
                 spearR.velocity = (player.transform.position - transform.position).normalized * spearVelocity * 0.7f;
@@ -79,7 +79,7 @@ public class LoyalSpear : MonoBehaviour
                 Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 dir = (mp - transform.position).normalized;
 
-                
+
                 //make the spear revolve around the player
                 transform.position = PlayerMovement.PM.playerGameObject.transform.position + new Vector3(Mathf.Cos(rotAngle), Mathf.Sin(rotAngle), 0.0f);
 
@@ -97,13 +97,17 @@ public class LoyalSpear : MonoBehaviour
                     //just got thrown
                     thrown = true;
 
+                    //if the ray hit, then set the target to where the mouse clicked
+                    target = new Vector2(mp.x, mp.y);
+                    //set the spear on a course for the target
+                    spearR.velocity = (target - new Vector2(transform.position.x, transform.position.y)).normalized * spearVelocity;
+                    //add a little error in the spears point direction to make it look realer
+                    transform.Rotate(new Vector3(0f, 0f, 1f), Random.Range(-10f, 10f));
 
+                    /*
                     //get the hit place for the spear target
                     RaycastHit2D rayHit = Physics2D.Raycast(mp, Vector2.zero);
-                    elec.Play();
-
-
-
+                    //elec.Play();
                     if (rayHit)
                     {
                         //if the ray hit, then set the target to where the mouse clicked
@@ -113,10 +117,12 @@ public class LoyalSpear : MonoBehaviour
                         //add a little error in the spears point direction to make it look realer
                         transform.Rotate(new Vector3(0f, 0f, 1f), Random.Range(-10f, 10f));
                     }
+                    */
+
                 }
             }
 
-            
+
         }
         else
         {
@@ -129,27 +135,28 @@ public class LoyalSpear : MonoBehaviour
             }
 
 
-            if(Input.GetKeyDown(InputManager.IM.MBTwo))
+            if (Input.GetKeyDown(InputManager.IM.MBTwo))
             {
                 //if tumbling and called back then return to the player
                 returning = true;
-                
+
                 spearR.angularVelocity = 0.0f;
                 spearR.velocity = Vector2.zero;
                 thrown = false;
                 tumbling = false;
-                
+
             }
-            
+
         }
-        
+
 
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject == spearTarget)
+        if (collision.gameObject == spearTarget)
         {
             tumbling = true;
             spearR.AddTorque(Random.Range(-100f, 100f));
