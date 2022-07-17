@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -118,7 +119,13 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity += (new Vector2(dir.x, dir.y) * knockback);
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("exit"))
+        {
+            SceneManager.LoadScene("level 1");
+        }
+    }
 
 
 }
