@@ -10,8 +10,8 @@ public class LoyalSpear : MonoBehaviour
     float rotAngle;
 
     public Vector2 target { get; set; }
-    
-    
+
+
     public Rigidbody2D spearR;
 
     public GameObject spearTarget;
@@ -61,7 +61,7 @@ public class LoyalSpear : MonoBehaviour
 
             if (returning)
             {
-                if(Vector2.Distance(player.transform.position, transform.position) < 1.0f)
+                if (Vector2.Distance(player.transform.position, transform.position) < 1.0f)
                 {
                     returning = false;
                     Vector2 dir = (transform.position - player.transform.position).normalized;
@@ -79,7 +79,7 @@ public class LoyalSpear : MonoBehaviour
                 Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 dir = (mp - transform.position).normalized;
 
-                
+
                 //make the spear revolve around the player
                 transform.position = PlayerMovement.PM.playerGameObject.transform.position + new Vector3(Mathf.Cos(rotAngle), Mathf.Sin(rotAngle), 0.0f);
 
@@ -109,8 +109,6 @@ public class LoyalSpear : MonoBehaviour
                     RaycastHit2D rayHit = Physics2D.Raycast(mp, Vector2.zero);
                     //elec.Play();
 
-
-
                     if (rayHit)
                     {
                         //if the ray hit, then set the target to where the mouse clicked
@@ -125,7 +123,7 @@ public class LoyalSpear : MonoBehaviour
                 }
             }
 
-            
+
         }
         else
         {
@@ -138,20 +136,20 @@ public class LoyalSpear : MonoBehaviour
             }
 
 
-            if(Input.GetKeyDown(InputManager.IM.MBTwo))
+            if (Input.GetKeyDown(InputManager.IM.MBTwo))
             {
                 //if tumbling and called back then return to the player
                 returning = true;
-                
+
                 spearR.angularVelocity = 0.0f;
                 spearR.velocity = Vector2.zero;
                 thrown = false;
                 tumbling = false;
-                
+
             }
-            
+
         }
-        
+
 
 
     }
