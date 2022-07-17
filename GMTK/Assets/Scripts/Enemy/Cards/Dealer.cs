@@ -28,13 +28,13 @@ public class Dealer : MonoBehaviour
     void Start()
     {
         //make the originals not actually do anything
-        cardHolder.SetActive(false);
+        //cardHolder.SetActive(false);
         cardMissile.SetActive(false);
-        knight.SetActive(false);
-        rook.SetActive(false);
-        rookTarget.SetActive(false);
-        whiteSquare.SetActive(false);
-        blackSquare.SetActive(false);
+        //knight.SetActive(false);
+        //rook.SetActive(false);
+        //rookTarget.SetActive(false);
+        //whiteSquare.SetActive(false);
+        //blackSquare.SetActive(false);
 
         /*
         enemyTypes = new GameObject[3];

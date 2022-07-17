@@ -50,7 +50,7 @@ public class LoyalSpear : MonoBehaviour
         thrown = false;
         tumbling = false;
         rotAngle = 0.0f;
-        elec.Stop();
+        //elec.Stop();
     }
 
     // Update is called once per frame
@@ -66,7 +66,7 @@ public class LoyalSpear : MonoBehaviour
                     returning = false;
                     Vector2 dir = (transform.position - player.transform.position).normalized;
                     rotAngle = Mathf.Atan2(dir.y, dir.x);
-                    elec.Stop();
+                    //elec.Stop();
                 }
 
                 spearR.velocity = (player.transform.position - transform.position).normalized * spearVelocity * 0.7f;
@@ -97,10 +97,17 @@ public class LoyalSpear : MonoBehaviour
                     //just got thrown
                     thrown = true;
 
+                    //if the ray hit, then set the target to where the mouse clicked
+                    target = new Vector2(mp.x, mp.y);
+                    //set the spear on a course for the target
+                    spearR.velocity = (target - new Vector2(transform.position.x, transform.position.y)).normalized * spearVelocity;
+                    //add a little error in the spears point direction to make it look realer
+                    transform.Rotate(new Vector3(0f, 0f, 1f), Random.Range(-10f, 10f));
 
+                    /*
                     //get the hit place for the spear target
                     RaycastHit2D rayHit = Physics2D.Raycast(mp, Vector2.zero);
-                    elec.Play();
+                    //elec.Play();
 
 
 
@@ -113,6 +120,8 @@ public class LoyalSpear : MonoBehaviour
                         //add a little error in the spears point direction to make it look realer
                         transform.Rotate(new Vector3(0f, 0f, 1f), Random.Range(-10f, 10f));
                     }
+                    */
+
                 }
             }
 
@@ -147,9 +156,10 @@ public class LoyalSpear : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject == spearTarget)
+        if (collision.gameObject == spearTarget)
         {
             tumbling = true;
             spearR.AddTorque(Random.Range(-100f, 100f));
