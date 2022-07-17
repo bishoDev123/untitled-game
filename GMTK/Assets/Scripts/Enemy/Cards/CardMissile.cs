@@ -7,6 +7,8 @@ public class CardMissile : MonoBehaviour
     public float missileSpeed;
     public float missileDamage;
 
+    private Animation anim;
+    public AnimationClip twist;
 
     private float startAng;
     private Rigidbody2D rb;
@@ -16,6 +18,9 @@ public class CardMissile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animation>();
+        anim.clip = twist;
+        anim.Play();
 
         //start at the parents location
         transform.position = gameObject.GetComponentInParent<Transform>().position;

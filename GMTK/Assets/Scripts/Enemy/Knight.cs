@@ -17,11 +17,18 @@ public class Knight : MonoBehaviour
 
     private float jumpingAng;
     private float coinFlip;
+
+
+    private Animation anim;
+    public AnimationClip knightclip;
     // Start is called before the first frame update
     void Start()
     {
         //45 45 90 triangle where knight travels along the two small sides
         //jumpSpeed = (jumpDistance * Mathf.Sqrt(2.0f)) / jumpDuration; 
+
+        anim = GetComponent<Animation>();
+        anim.clip = knightclip;
 
         rb = gameObject.GetComponent<Rigidbody2D>();
 
@@ -41,6 +48,9 @@ public class Knight : MonoBehaviour
     {
         if(Time.time - prevJumpTime > jumpDelay)
         {
+            
+            anim.Play();
+
             coinFlip = Mathf.Sign(Random.Range(-1.0f, 1.0f));
 
             
@@ -81,6 +91,7 @@ public class Knight : MonoBehaviour
 
         if (endJump && Time.time - prevJumpTime >= jumpDuration)
         {
+            anim.Stop();
             rb.velocity = Vector2.zero;
         }
     }
